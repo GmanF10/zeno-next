@@ -1,5 +1,8 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* CSS Variables */
 :root {
   /* Color Palette */
   --background: #ffffff;
@@ -8,20 +11,21 @@
   --color-foreground: var(--foreground);
 
   /* Typography */
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans, 'Geist', sans-serif);
+  --font-mono: var(--font-geist-mono, 'Geist Mono', monospace);
 
-  /* Example additional vars */
-  /* --primary: #39ff14; */
+  /* Optional */
+  --primary: #39ff14;
 }
 
+/* Base Body Styling */
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  font-family: var(--font-sans);
 }
 
-/* Neon pulse animation for cards, etc. */
+/* Neon Pulse Animation */
 @keyframes glowPulse {
   0%, 100% {
     box-shadow: 0 0 15px #65ec4d, inset 0 0 30px #65ec4d;
@@ -30,6 +34,7 @@ body {
     box-shadow: 0 0 30px #65ec4d, inset 0 0 45px #65ec4d;
   }
 }
+
 .animate-glowPulse {
   animation: glowPulse 3s ease-in-out infinite;
 }
