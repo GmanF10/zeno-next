@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani&family=Share+Tech+Mono&display=swap');
+:root {
+  --neon-green: #65ec4df8;
+  --ai-glow: #09d65ec7;
+  --bg-dark: #0c0c0f;
+  --text-glow: #38d868da;
+  --highlight: #3ed410c5;
+}
+body {
+  background: var(--bg-dark);
+  color: #fff;
+  font-family: 'Rajdhani', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+/* Add your other styles here, or copy from your styles.css */
