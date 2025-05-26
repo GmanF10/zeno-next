@@ -4,9 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/dashboard", label: "Dashboard" },
   { href: "/login", label: "Login" },
   { href: "/register", label: "Sign Up" },
-  // Add more links if you want (e.g., { href: "/dashboard", label: "Dashboard" })
 ];
 
 export default function Header() {

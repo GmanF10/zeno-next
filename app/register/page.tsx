@@ -28,12 +28,27 @@ export default function RegisterPage() {
       await createUserWithEmailAndPassword(auth, email.trim(), password);
       setStatus("✅ Account created!");
       setTimeout(() => router.push("/dashboard"), 1000);
-    } catch (err: any) {
+    } catch (err: unknown) {
       let msg = "Registration failed.";
-      if (err.code === "auth/email-already-in-use") msg = "Email already in use.";
-      else if (err.code === "auth/invalid-email") msg = "Invalid email address.";
-      else if (err.code === "auth/weak-password") msg = "Password is too weak (min 6 chars).";
-      else if (err.message) msg = err.message;
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "code" in err &&
+        typeof (err as { code: unknown }).code === "string"
+      ) {
+        const errorCode = (err as { code: string }).code;
+        if (errorCode === "auth/email-already-in-use") msg = "Email already in use.";
+        else if (errorCode === "auth/invalid-email") msg = "Invalid email address.";
+        else if (errorCode === "auth/weak-password") msg = "Password is too weak (min 6 chars).";
+      }
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "message" in err &&
+        typeof (err as { message: unknown }).message === "string"
+      ) {
+        msg = (err as { message: string }).message;
+      }
       setStatus(`❌ ${msg}`);
     }
     setLoading(false);
@@ -59,7 +74,7 @@ export default function RegisterPage() {
             autoFocus
             className="rounded-lg p-3 bg-black/30 text-[#ededed] border-2 border-[#65ec4d] focus:outline-none focus:ring-2 focus:ring-[#39ff14]"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             required
             autoComplete="email"
             aria-label="Email address"
@@ -69,7 +84,7 @@ export default function RegisterPage() {
             placeholder="Password"
             className="rounded-lg p-3 bg-black/30 text-[#ededed] border-2 border-[#65ec4d] focus:outline-none focus:ring-2 focus:ring-[#39ff14]"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             required
             autoComplete="new-password"
             aria-label="Password"
@@ -83,7 +98,7 @@ export default function RegisterPage() {
                 : "border-[#65ec4d] focus:ring-[#39ff14]"
             } focus:outline-none`}
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
             required
             autoComplete="new-password"
             aria-label="Confirm password"

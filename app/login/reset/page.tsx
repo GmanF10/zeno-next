@@ -38,10 +38,25 @@ export default function ResetPage() {
       setStatus(
         `✅ If an account with "${email.trim()}" exists, a password reset email has been sent.`
       );
-    } catch (err: any) {
+    } catch (err: unknown) {
       let msg = "Failed to send reset email.";
-      if (err.code === "auth/invalid-email") msg = "Invalid email address.";
-      else if (err.message) msg = err.message;
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "code" in err &&
+        typeof (err as { code: unknown }).code === "string"
+      ) {
+        const errorCode = (err as { code: string }).code;
+        if (errorCode === "auth/invalid-email") msg = "Invalid email address.";
+      }
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "message" in err &&
+        typeof (err as { message: unknown }).message === "string"
+      ) {
+        msg = (err as { message: string }).message;
+      }
       setStatus(`❌ ${msg}`);
     }
     setLoading(false);

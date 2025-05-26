@@ -43,8 +43,8 @@ export default function LoginPage() {
     e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>
   ) => {
     if (
-      (e as React.KeyboardEvent).type === "keydown" &&
-      !["Enter", " "].includes((e as React.KeyboardEvent).key)
+      (e as React.KeyboardEvent<HTMLButtonElement>).type === "keydown" &&
+      !["Enter", " "].includes((e as React.KeyboardEvent<HTMLButtonElement>).key)
     ) {
       return;
     }
@@ -62,12 +62,28 @@ export default function LoginPage() {
         setStatus("");
         router.push("/dashboard");
       }, 1000);
-    } catch (err: any) {
+    } catch (err: unknown) {
       let msg = "Login failed.";
-      if (err.code === "auth/user-not-found") msg = "No account found with that email.";
-      else if (err.code === "auth/wrong-password") msg = "Incorrect password.";
-      else if (err.code === "auth/invalid-email") msg = "Invalid email address.";
-      else if (err.message) msg = err.message;
+      // Narrow error type for best type safety
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "code" in err &&
+        typeof (err as { code: unknown }).code === "string"
+      ) {
+        const errorCode = (err as { code: string }).code;
+        if (errorCode === "auth/user-not-found") msg = "No account found with that email.";
+        else if (errorCode === "auth/wrong-password") msg = "Incorrect password.";
+        else if (errorCode === "auth/invalid-email") msg = "Invalid email address.";
+      }
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "message" in err &&
+        typeof (err as { message: unknown }).message === "string"
+      ) {
+        msg = (err as { message: string }).message;
+      }
       setStatus(`❌ ${msg}`);
     }
     setLoading(false);

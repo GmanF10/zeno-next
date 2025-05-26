@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { auth, } from "@/firebase";
+import { auth } from "@/firebase";
 import { updateProfile, User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
@@ -68,8 +68,12 @@ export default function DashboardPage() {
       setSaveStatus("✅ Profile updated successfully.");
       // Update local user state
       setUser({ ...user, displayName: displayName.trim() } as User);
-    } catch (err: any) {
-      setSaveStatus(`❌ Failed to update profile: ${err.message || err}`);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setSaveStatus(`❌ Failed to update profile: ${err.message}`);
+      } else {
+        setSaveStatus(`❌ Failed to update profile: ${String(err)}`);
+      }
     }
     setSaving(false);
   };
@@ -132,7 +136,7 @@ export default function DashboardPage() {
           id="displayName"
           type="text"
           value={displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDisplayName(e.target.value)}
           className="w-full rounded-lg p-3 bg-black/30 border-2 border-[#65ec4d] text-[#ededed] focus:outline-none focus:ring-2 focus:ring-[#39ff14]"
           placeholder="Enter your display name"
           aria-label="Display name"

@@ -57,8 +57,14 @@ export default function VerifyEmailPage() {
       setMessage("✅ Verification email resent. Please check your inbox.");
     } catch (err: unknown) {
       let msg = "❌ Error resending verification email.";
-      if (err instanceof Error) {
-        msg += " " + err.message;
+      // Robust error narrowing
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "message" in err &&
+        typeof (err as { message: unknown }).message === "string"
+      ) {
+        msg += " " + (err as { message: string }).message;
       }
       setMessage(msg);
     }
