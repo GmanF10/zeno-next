@@ -58,7 +58,7 @@ export default function Header() {
               key={href}
               href={href}
               className={`
-                neon-btn neon-glow uppercase font-bold tracking-wide px-8 py-2 text-lg
+                neon-btn neon-glow uppercase font-bold tracking-wide px-6 py-2 text-lg
                 ${pathname === href ? "bg-[#39ff14] text-black" : ""}
               `}
               aria-current={pathname === href ? "page" : undefined}
