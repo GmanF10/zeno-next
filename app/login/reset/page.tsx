@@ -17,7 +17,6 @@ export default function ResetPage() {
     debounceRef.current = setTimeout(() => setStatus(""), 600);
   };
 
-  // Clean up debounce timer on unmount
   useEffect(() => {
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -63,33 +62,27 @@ export default function ResetPage() {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen">
-      <div className="bg-[rgba(48,45,45,0.15)] border-2 border-[#65ec4d] rounded-2xl p-10 shadow-2xl max-w-md w-full text-center backdrop-blur-xl animate-glowPulse">
-        <div className="mb-6">
-          <span className="inline-block border-2 border-[#65ec4d] p-4 rounded-xl bg-[rgba(9,32,2,0.6)] shadow-[0_0_20px_#09d65e]">
-            <h2 className="text-4xl font-orbitron font-bold text-[#39ff14] tracking-wider drop-shadow-neon mb-0">
-              ZENØ
-            </h2>
-          </span>
-        </div>
-        <p className="text-[#65ec4d] font-mono mb-4 text-lg tracking-widest">
-          Enter The Realm Where Intelligence Breathes
+    <section className="flex flex-col items-center justify-center min-h-screen bg-black">
+      <div className="neon-card p-10 max-w-md w-full flex flex-col items-center animate-glowPulse">
+        <h2 className="neon-header text-3xl mb-6 tracking-widest">RESET PASSWORD</h2>
+        <p className="text-[#65ec4d] font-mono mb-4 text-lg tracking-widest neon-glow uppercase">
+          Enter your email to reset your password
         </p>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-4 mb-4"
+          className="flex flex-col gap-5 w-full"
           aria-describedby="reset-status"
           autoComplete="email"
         >
-          <label htmlFor="email" className="text-[#65ec4d] font-mono text-sm text-left">
-            Enter your email address
+          <label htmlFor="email" className="text-[#65ec4d] font-mono text-sm neon-glow uppercase mb-2">
+            Email Address
           </label>
           <input
             id="email"
             type="email"
             placeholder="Email"
             autoFocus
-            className="rounded-lg p-3 bg-black/30 text-[#ededed] border-2 border-[#65ec4d] focus:outline-none focus:ring-2 focus:ring-[#39ff14]"
+            className="w-full rounded-lg p-3 bg-black/40 text-[#ededed] border-2 border-[#39ff14] neon-glow focus:outline-none focus:ring-2 focus:ring-[#39ff14]"
             value={email}
             onChange={handleEmailChange}
             required
@@ -98,7 +91,7 @@ export default function ResetPage() {
           />
           <button
             type="submit"
-            className="px-8 py-2 bg-[#65ec4d] text-black font-bold rounded-lg shadow hover:bg-[#39ff14] hover:text-black transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="neon-btn w-full"
             disabled={loading || !email.trim()}
           >
             {loading ? "Sending..." : "Send Reset Email"}
@@ -106,20 +99,20 @@ export default function ResetPage() {
           <div
             id="reset-status"
             aria-live="polite"
-            className={`min-h-[1.5em] font-mono ${
+            className={`min-h-[1.5em] font-mono neon-glow text-center text-base ${
               status.startsWith("❌")
                 ? "text-red-500"
                 : status.startsWith("✅")
                 ? "text-[#65ec4d]"
-                : ""
+                : "text-[#ededed]"
             }`}
           >
             {status}
           </div>
         </form>
-        <p className="text-[#ededed] text-sm">
+        <p className="text-[#ededed] text-sm mt-6">
           Remember your password?{" "}
-          <Link href="/login" className="text-[#65ec4d] underline hover:text-[#39ff14]">
+          <Link href="/login" className="text-[#65ec4d] underline hover:text-[#39ff14] neon-glow">
             Log In
           </Link>
         </p>

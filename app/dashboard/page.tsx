@@ -66,7 +66,6 @@ export default function DashboardPage() {
     try {
       await updateProfile(user, { displayName: displayName.trim() });
       setSaveStatus("✅ Profile updated successfully.");
-      // Update local user state
       setUser({ ...user, displayName: displayName.trim() } as User);
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -102,17 +101,17 @@ export default function DashboardPage() {
             d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
           />
         </svg>
-        <p>Loading dashboard...</p>
+        <p className="neon-glow text-lg">Loading dashboard...</p>
       </section>
     );
 
   if (error)
     return (
       <section className="min-h-screen flex flex-col items-center justify-center bg-black text-red-600 font-mono p-6">
-        <p className="mb-4">{error}</p>
+        <p className="mb-4 neon-glow">{error}</p>
         <button
           onClick={checkAuth}
-          className="px-6 py-2 bg-[#65ec4d] rounded hover:bg-[#39ff14] text-black font-bold transition"
+          className="neon-btn"
           aria-label="Retry authentication"
         >
           Retry
@@ -121,47 +120,46 @@ export default function DashboardPage() {
     );
 
   return (
-    <main className="min-h-screen p-8 bg-black text-[#65ec4d] font-mono max-w-lg mx-auto">
-      <h1 className="text-4xl font-orbitron mb-6">Welcome to your Dashboard</h1>
-
-      <p className="mb-4">
-        Logged in as: <span className="font-bold">{user?.email}</span>
-      </p>
-
-      <div className="mb-6">
-        <label htmlFor="displayName" className="block mb-2 font-mono text-[#65ec4d]">
-          Display Name
-        </label>
-        <input
-          id="displayName"
-          type="text"
-          value={displayName}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDisplayName(e.target.value)}
-          className="w-full rounded-lg p-3 bg-black/30 border-2 border-[#65ec4d] text-[#ededed] focus:outline-none focus:ring-2 focus:ring-[#39ff14]"
-          placeholder="Enter your display name"
-          aria-label="Display name"
-        />
-      </div>
-
-      <button
-        onClick={handleSave}
-        disabled={saving || displayName.trim() === (user?.displayName || "").trim()}
-        className="px-8 py-2 bg-[#65ec4d] text-black font-bold rounded-lg shadow hover:bg-[#39ff14] transition disabled:opacity-50 disabled:cursor-not-allowed"
-        aria-label="Save profile"
-      >
-        {saving ? "Saving..." : "Save Profile"}
-      </button>
-
-      {saveStatus && (
-        <p
-          aria-live="polite"
-          className={`mt-4 font-mono ${
-            saveStatus.startsWith("❌") ? "text-red-500" : "text-[#65ec4d]"
-          }`}
-        >
-          {saveStatus}
+    <main className="flex items-center justify-center min-h-screen bg-black">
+      <div className="neon-card p-10 max-w-lg w-full flex flex-col items-center">
+        <h1 className="neon-header text-4xl mb-6">Your Dashboard</h1>
+        <p className="mb-4 neon-glow">
+          <span className="font-bold">Logged in as:</span>{" "}
+          <span className="text-[#65ec4d]">{user?.email}</span>
         </p>
-      )}
+        <div className="mb-6 w-full">
+          <label htmlFor="displayName" className="block mb-2 font-mono neon-glow text-[#65ec4d]">
+            Display Name
+          </label>
+          <input
+            id="displayName"
+            type="text"
+            value={displayName}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDisplayName(e.target.value)}
+            className="w-full rounded-lg p-3 bg-black/40 border-2 border-[#39ff14] text-[#ededed] focus:outline-none focus:ring-2 focus:ring-[#39ff14] neon-glow"
+            placeholder="Enter your display name"
+            aria-label="Display name"
+          />
+        </div>
+        <button
+          onClick={handleSave}
+          disabled={saving || displayName.trim() === (user?.displayName || "").trim()}
+          className="neon-btn w-full"
+          aria-label="Save profile"
+        >
+          {saving ? "Saving..." : "Save Profile"}
+        </button>
+        {saveStatus && (
+          <p
+            aria-live="polite"
+            className={`mt-4 font-mono text-lg neon-glow ${
+              saveStatus.startsWith("❌") ? "text-red-500" : "text-[#65ec4d]"
+            }`}
+          >
+            {saveStatus}
+          </p>
+        )}
+      </div>
     </main>
   );
 }

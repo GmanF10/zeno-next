@@ -21,14 +21,12 @@ export default function LoginPage() {
     debounceRef.current = setTimeout(() => setStatus(""), 600);
   };
 
-  // Clean up debounce timer on unmount
   useEffect(() => {
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
     };
   }, []);
 
-  // Trim email on change
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value.trim());
     clearStatus();
@@ -38,7 +36,6 @@ export default function LoginPage() {
     clearStatus();
   };
 
-  // Password toggle: accessible and keyboard-friendly
   const handleTogglePassword = (
     e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>
   ) => {
@@ -64,7 +61,6 @@ export default function LoginPage() {
       }, 1000);
     } catch (err: unknown) {
       let msg = "Login failed.";
-      // Narrow error type for best type safety
       if (
         typeof err === "object" &&
         err !== null &&
@@ -90,25 +86,19 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen">
-      <div className="bg-[rgba(48,45,45,0.15)] border-2 border-[#65ec4d] rounded-2xl p-10 shadow-2xl max-w-md w-full text-center backdrop-blur-xl animate-glowPulse">
-        <div className="mb-6">
-          <span className="inline-block border-2 border-[#65ec4d] p-4 rounded-xl bg-[rgba(9,32,2,0.6)] shadow-[0_0_20px_#09d65e]">
-            <h2 className="text-4xl font-orbitron font-bold text-[#39ff14] tracking-wider drop-shadow-neon mb-0">
-              ZENØ
-            </h2>
-          </span>
-        </div>
-        <p className="text-[#65ec4d] font-mono mb-4 text-lg tracking-widest">
-          Enter The Realm Where Intelligence Breathes
+    <section className="flex flex-col items-center justify-center min-h-screen bg-black">
+      <div className="neon-card p-10 max-w-md w-full flex flex-col items-center animate-glowPulse">
+        <h2 className="neon-header text-3xl mb-6 tracking-widest">LOGIN</h2>
+        <p className="text-[#65ec4d] font-mono mb-4 text-lg tracking-widest neon-glow uppercase">
+          Enter the Realm Where Intelligence Breathes
         </p>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-4 mb-4"
+          className="flex flex-col gap-5 w-full"
           aria-describedby="login-status"
         >
-          <div className="text-left">
-            <label htmlFor="email" className="text-[#65ec4d] font-mono text-sm">
+          <div className="w-full">
+            <label htmlFor="email" className="text-[#65ec4d] font-mono text-sm mb-2 block neon-glow uppercase">
               Email
             </label>
             <input
@@ -116,7 +106,7 @@ export default function LoginPage() {
               type="email"
               placeholder="Email"
               autoFocus
-              className="w-full rounded-lg p-3 bg-black/30 text-[#ededed] border-2 border-[#65ec4d] focus:outline-none focus:ring-2 focus:ring-[#39ff14]"
+              className="w-full rounded-lg p-3 bg-black/40 border-2 border-[#39ff14] text-[#ededed] neon-glow focus:outline-none focus:ring-2 focus:ring-[#39ff14]"
               value={email}
               onChange={handleEmailChange}
               required
@@ -124,15 +114,15 @@ export default function LoginPage() {
               aria-label="Email address"
             />
           </div>
-          <div className="text-left relative">
-            <label htmlFor="password" className="text-[#65ec4d] font-mono text-sm">
+          <div className="w-full relative">
+            <label htmlFor="password" className="text-[#65ec4d] font-mono text-sm mb-2 block neon-glow uppercase">
               Password
             </label>
             <input
               id="password"
               type={showPassword ? "text" : "password"}
               placeholder="Password"
-              className="w-full rounded-lg p-3 bg-black/30 text-[#ededed] border-2 border-[#65ec4d] focus:outline-none focus:ring-2 focus:ring-[#39ff14] pr-12"
+              className="w-full rounded-lg p-3 bg-black/40 border-2 border-[#39ff14] text-[#ededed] neon-glow focus:outline-none focus:ring-2 focus:ring-[#39ff14] pr-12"
               value={password}
               onChange={handlePasswordChange}
               required
@@ -153,7 +143,7 @@ export default function LoginPage() {
           </div>
           <button
             type="submit"
-            className="px-8 py-2 bg-[#65ec4d] text-black font-bold rounded-lg shadow hover:bg-[#39ff14] hover:text-black transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="neon-btn w-full"
             disabled={loading || !email || !password}
           >
             {loading ? "Logging in..." : "Login"}
@@ -161,27 +151,25 @@ export default function LoginPage() {
           <div
             id="login-status"
             aria-live="polite"
-            className={`min-h-[1.5em] font-mono ${
+            className={`min-h-[1.5em] font-mono neon-glow text-center text-base ${
               status.startsWith("❌")
                 ? "text-red-500"
                 : status.startsWith("✅")
                 ? "text-[#65ec4d]"
-                : status
-                ? "text-[#65ec4d]"
-                : ""
+                : "text-[#ededed]"
             }`}
           >
             {status}
           </div>
         </form>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mt-6 w-full items-center">
           <p className="text-[#ededed] text-sm">
             Don&apos;t have an account?{" "}
-            <Link href="/register" className="text-[#65ec4d] underline hover:text-[#39ff14]">
+            <Link href="/register" className="text-[#65ec4d] underline hover:text-[#39ff14] neon-glow">
               Create one here
             </Link>
           </p>
-          <Link href="/reset" className="text-[#65ec4d] underline hover:text-[#39ff14] text-xs">
+          <Link href="/reset" className="text-[#65ec4d] underline hover:text-[#39ff14] neon-glow text-xs">
             Forgot password?
           </Link>
         </div>
