@@ -15,7 +15,6 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.7",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -27,18 +26,23 @@
     "tailwindcss": "^4.1.7",
     "typescript": "^5"
   },
-  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
-  "main": "index.js",
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [create-next-app](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GmanF10/zeno-next.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/GmanF10/zeno-next/issues"
   },
+  "keywords": [
+    "nextjs",
+    "react",
+    "web-development",
+    "firebase",
+    "tailwindcss"
+  ],
+  "author": "Garre",
+  "license": "MIT",
+  "type": "module",
   "homepage": "https://github.com/GmanF10/zeno-next#readme"
 }
