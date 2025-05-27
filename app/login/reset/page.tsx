@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { auth } from "@/firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
+import NeonCard from "@/components/NeonCard";
+import NeonButton from "@/components/NeonButton";
 
 export default function ResetPage() {
   const [email, setEmail] = useState("");
@@ -62,10 +64,10 @@ export default function ResetPage() {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen bg-black">
-      <div className="neon-card p-10 max-w-md w-full flex flex-col items-center animate-glowPulse">
+    <section className="flex flex-col items-center justify-center min-h-screen bg-background">
+      <NeonCard>
         <h2 className="neon-header text-3xl mb-6 tracking-widest">RESET PASSWORD</h2>
-        <p className="text-[#65ec4d] font-mono mb-4 text-lg tracking-widest neon-glow uppercase">
+        <p className="text-accent font-mono mb-4 text-lg tracking-widest neon-glow uppercase">
           Enter your email to reset your password
         </p>
         <form
@@ -74,7 +76,7 @@ export default function ResetPage() {
           aria-describedby="reset-status"
           autoComplete="email"
         >
-          <label htmlFor="email" className="text-[#65ec4d] font-mono text-sm neon-glow uppercase mb-2">
+          <label htmlFor="email" className="text-accent font-mono text-sm neon-glow uppercase mb-2">
             Email Address
           </label>
           <input
@@ -82,20 +84,20 @@ export default function ResetPage() {
             type="email"
             placeholder="Email"
             autoFocus
-            className="w-full rounded-lg p-3 bg-black/40 text-[#ededed] border-2 border-[#39ff14] neon-glow focus:outline-none focus:ring-2 focus:ring-[#39ff14]"
+            className="w-full rounded-lg p-3 bg-background-alt text-foreground border-2 border-primary neon-glow focus:outline-none focus:ring-2 focus:ring-primary"
             value={email}
             onChange={handleEmailChange}
             required
             autoComplete="email"
             aria-label="Email address"
           />
-          <button
+          <NeonButton
             type="submit"
-            className="neon-btn w-full"
+            className="w-full"
             disabled={loading || !email.trim()}
           >
             {loading ? "Sending..." : "Send Reset Email"}
-          </button>
+          </NeonButton>
           <div
             id="reset-status"
             aria-live="polite"
@@ -103,20 +105,20 @@ export default function ResetPage() {
               status.startsWith("❌")
                 ? "text-red-500"
                 : status.startsWith("✅")
-                ? "text-[#65ec4d]"
-                : "text-[#ededed]"
+                ? "text-accent"
+                : "text-foreground"
             }`}
           >
             {status}
           </div>
         </form>
-        <p className="text-[#ededed] text-sm mt-6">
+        <p className="text-foreground text-sm mt-6">
           Remember your password?{" "}
-          <Link href="/login" className="text-[#65ec4d] underline hover:text-[#39ff14] neon-glow">
+          <Link href="/login" className="text-accent underline hover:text-primary neon-glow">
             Log In
           </Link>
         </p>
-      </div>
+      </NeonCard>
     </section>
   );
 }

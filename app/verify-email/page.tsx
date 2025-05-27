@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { auth } from "@/firebase";
 import { sendEmailVerification } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import NeonCard from "@/components/NeonCard";
+import NeonButton from "@/components/NeonButton";
 
 export default function VerifyEmailPage() {
   const [message, setMessage] = useState("");
@@ -71,35 +73,35 @@ export default function VerifyEmailPage() {
 
   if (noUser) {
     return (
-      <section className="min-h-screen flex flex-col justify-center items-center bg-black p-6">
-        <div className="neon-card p-10 max-w-md w-full text-center animate-glowPulse">
+      <section className="min-h-screen flex flex-col justify-center items-center bg-background p-6">
+        <NeonCard className="max-w-md w-full text-center">
           <h1 className="neon-header text-3xl mb-4">Not Logged In</h1>
           <p className="mb-4 neon-glow">You must be logged in to verify your email.</p>
           <p className="neon-glow">Redirecting to login page...</p>
-        </div>
+        </NeonCard>
       </section>
     );
   }
 
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center bg-black p-6">
-      <div className="neon-card p-10 max-w-md w-full text-center animate-glowPulse">
+    <section className="min-h-screen flex flex-col justify-center items-center bg-background p-6">
+      <NeonCard className="max-w-md w-full text-center">
         <h1 className="neon-header text-3xl mb-4">Verify Your Email</h1>
         <p className="mb-6 neon-glow">
           A verification link has been sent to your email address.<br />
           Please check your inbox and verify your email to continue using ZENØ.
         </p>
-        <button
+        <NeonButton
           onClick={resendVerification}
           disabled={loading || noUser}
-          className="neon-btn flex items-center justify-center w-full"
-          aria-disabled={loading || noUser}
+          className="flex items-center justify-center w-full"
+          aria-label="Resend verification email"
           onFocus={clearStatus}
           onBlur={clearStatus}
         >
           {loading && (
             <svg
-              className="animate-spin h-5 w-5 text-[#0a0c10] mr-2"
+              className="animate-spin h-5 w-5 text-background mr-2"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -121,18 +123,18 @@ export default function VerifyEmailPage() {
             </svg>
           )}
           {loading ? "Sending..." : "Resend Verification Email"}
-        </button>
+        </NeonButton>
         {message && (
           <p
             aria-live="polite"
             className={`mt-4 font-mono neon-glow text-base ${
-              message.startsWith("❌") ? "text-red-500" : "text-[#65ec4d]"
+              message.startsWith("❌") ? "text-red-500" : "text-accent"
             }`}
           >
             {message}
           </p>
         )}
-      </div>
+      </NeonCard>
     </section>
   );
 }

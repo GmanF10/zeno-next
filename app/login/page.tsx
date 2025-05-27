@@ -5,6 +5,8 @@ import { useState, useRef, useEffect } from "react";
 import { auth } from "@/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import NeonCard from "@/components/NeonCard";
+import NeonButton from "@/components/NeonButton";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,7 +17,6 @@ export default function LoginPage() {
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
   const router = useRouter();
 
-  // Debounced clear status on input change
   const clearStatus = () => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => setStatus(""), 600);
@@ -86,10 +87,10 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen bg-black">
-      <div className="neon-card p-10 max-w-md w-full flex flex-col items-center animate-glowPulse">
+    <section className="flex flex-col items-center justify-center min-h-screen bg-background">
+      <NeonCard>
         <h2 className="neon-header text-3xl mb-6 tracking-widest">LOGIN</h2>
-        <p className="text-[#65ec4d] font-mono mb-4 text-lg tracking-widest neon-glow uppercase">
+        <p className="text-accent font-mono mb-4 text-lg tracking-widest neon-glow uppercase">
           Enter the Realm Where Intelligence Breathes
         </p>
         <form
@@ -98,7 +99,7 @@ export default function LoginPage() {
           aria-describedby="login-status"
         >
           <div className="w-full">
-            <label htmlFor="email" className="text-[#65ec4d] font-mono text-sm mb-2 block neon-glow uppercase">
+            <label htmlFor="email" className="text-accent font-mono text-sm mb-2 block neon-glow uppercase">
               Email
             </label>
             <input
@@ -106,7 +107,7 @@ export default function LoginPage() {
               type="email"
               placeholder="Email"
               autoFocus
-              className="w-full rounded-lg p-3 bg-black/40 border-2 border-[#39ff14] text-[#ededed] neon-glow focus:outline-none focus:ring-2 focus:ring-[#39ff14]"
+              className="w-full rounded-lg p-3 bg-background-alt border-2 border-primary text-foreground neon-glow focus:outline-none focus:ring-2 focus:ring-primary"
               value={email}
               onChange={handleEmailChange}
               required
@@ -115,39 +116,39 @@ export default function LoginPage() {
             />
           </div>
           <div className="w-full relative">
-            <label htmlFor="password" className="text-[#65ec4d] font-mono text-sm mb-2 block neon-glow uppercase">
+            <label htmlFor="password" className="text-accent font-mono text-sm mb-2 block neon-glow uppercase">
               Password
             </label>
             <input
               id="password"
               type={showPassword ? "text" : "password"}
               placeholder="Password"
-              className="w-full rounded-lg p-3 bg-black/40 border-2 border-[#39ff14] text-[#ededed] neon-glow focus:outline-none focus:ring-2 focus:ring-[#39ff14] pr-12"
+              className="w-full rounded-lg p-3 bg-background-alt border-2 border-primary text-foreground neon-glow focus:outline-none focus:ring-2 focus:ring-primary pr-12"
               value={password}
               onChange={handlePasswordChange}
               required
               autoComplete="current-password"
               aria-label="Password"
             />
-            <button
+            <NeonButton
               type="button"
               role="button"
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-[#65ec4d] hover:text-[#39ff14] focus:outline-none"
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-accent hover:text-primary focus:outline-none"
               tabIndex={0}
               aria-label={showPassword ? "Hide password" : "Show password"}
               onClick={handleTogglePassword}
               onKeyDown={handleTogglePassword}
             >
               {showPassword ? "Hide" : "Show"}
-            </button>
+            </NeonButton>
           </div>
-          <button
+          <NeonButton
             type="submit"
-            className="neon-btn w-full"
+            className="w-full"
             disabled={loading || !email || !password}
           >
             {loading ? "Logging in..." : "Login"}
-          </button>
+          </NeonButton>
           <div
             id="login-status"
             aria-live="polite"
@@ -155,25 +156,25 @@ export default function LoginPage() {
               status.startsWith("❌")
                 ? "text-red-500"
                 : status.startsWith("✅")
-                ? "text-[#65ec4d]"
-                : "text-[#ededed]"
+                ? "text-accent"
+                : "text-foreground"
             }`}
           >
             {status}
           </div>
         </form>
         <div className="flex flex-col gap-2 mt-6 w-full items-center">
-          <p className="text-[#ededed] text-sm">
+          <p className="text-foreground text-sm">
             Don&apos;t have an account?{" "}
-            <Link href="/register" className="text-[#65ec4d] underline hover:text-[#39ff14] neon-glow">
+            <Link href="/register" className="text-accent underline hover:text-primary neon-glow">
               Create one here
             </Link>
           </p>
-          <Link href="/reset" className="text-[#65ec4d] underline hover:text-[#39ff14] neon-glow text-xs">
+          <Link href="/reset" className="text-accent underline hover:text-primary neon-glow text-xs">
             Forgot password?
           </Link>
         </div>
-      </div>
+      </NeonCard>
     </section>
   );
 }

@@ -5,11 +5,14 @@
 /* Neon Theme Variables */
 :root {
   --background: #0a0c10;
+  --background-alt: rgba(10,32,2,0.85);
   --foreground: #ededed;
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --primary: #39ff14;
   --accent: #65ec4d;
+  --text-light: #cfd8dc;
+  --text-highlight: #a3ffb8;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
 }
 
 /* Base Body Styling */

@@ -4,6 +4,8 @@ import { useEffect, useState, useCallback } from "react";
 import { auth } from "@/firebase";
 import { updateProfile, User } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import NeonCard from "@/components/NeonCard";
+import NeonButton from "@/components/NeonButton";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -79,9 +81,9 @@ export default function DashboardPage() {
 
   if (loading)
     return (
-      <section className="min-h-screen flex flex-col items-center justify-center bg-black text-[#65ec4d] font-mono">
+      <section className="min-h-screen flex flex-col items-center justify-center bg-background text-accent font-mono">
         <svg
-          className="animate-spin h-12 w-12 mb-4 text-[#65ec4d]"
+          className="animate-spin h-12 w-12 mb-4 text-accent"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -107,28 +109,24 @@ export default function DashboardPage() {
 
   if (error)
     return (
-      <section className="min-h-screen flex flex-col items-center justify-center bg-black text-red-600 font-mono p-6">
+      <section className="min-h-screen flex flex-col items-center justify-center bg-background text-red-600 font-mono p-6">
         <p className="mb-4 neon-glow">{error}</p>
-        <button
-          onClick={checkAuth}
-          className="neon-btn"
-          aria-label="Retry authentication"
-        >
+        <NeonButton onClick={checkAuth} aria-label="Retry authentication">
           Retry
-        </button>
+        </NeonButton>
       </section>
     );
 
   return (
-    <main className="flex items-center justify-center min-h-screen bg-black">
-      <div className="neon-card p-10 max-w-lg w-full flex flex-col items-center">
+    <section className="flex items-center justify-center min-h-screen bg-background">
+      <NeonCard>
         <h1 className="neon-header text-4xl mb-6">Your Dashboard</h1>
         <p className="mb-4 neon-glow">
           <span className="font-bold">Logged in as:</span>{" "}
-          <span className="text-[#65ec4d]">{user?.email}</span>
+          <span className="text-accent">{user?.email}</span>
         </p>
         <div className="mb-6 w-full">
-          <label htmlFor="displayName" className="block mb-2 font-mono neon-glow text-[#65ec4d]">
+          <label htmlFor="displayName" className="block mb-2 font-mono neon-glow text-accent">
             Display Name
           </label>
           <input
@@ -136,30 +134,30 @@ export default function DashboardPage() {
             type="text"
             value={displayName}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDisplayName(e.target.value)}
-            className="w-full rounded-lg p-3 bg-black/40 border-2 border-[#39ff14] text-[#ededed] focus:outline-none focus:ring-2 focus:ring-[#39ff14] neon-glow"
+            className="w-full rounded-lg p-3 bg-background-alt border-2 border-primary text-foreground focus:outline-none focus:ring-2 focus:ring-primary neon-glow"
             placeholder="Enter your display name"
             aria-label="Display name"
           />
         </div>
-        <button
+        <NeonButton
           onClick={handleSave}
           disabled={saving || displayName.trim() === (user?.displayName || "").trim()}
-          className="neon-btn w-full"
+          className="w-full"
           aria-label="Save profile"
         >
           {saving ? "Saving..." : "Save Profile"}
-        </button>
+        </NeonButton>
         {saveStatus && (
           <p
             aria-live="polite"
             className={`mt-4 font-mono text-lg neon-glow ${
-              saveStatus.startsWith("❌") ? "text-red-500" : "text-[#65ec4d]"
+              saveStatus.startsWith("❌") ? "text-red-500" : "text-accent"
             }`}
           >
             {saveStatus}
           </p>
         )}
-      </div>
-    </main>
+      </NeonCard>
+    </section>
   );
 }
