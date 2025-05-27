@@ -12,7 +12,7 @@ type NeonButtonProps = ButtonProps | AnchorProps;
 export default function NeonButton(props: NeonButtonProps) {
   if (props.as === "a") {
     // Anchor (link) button
-    const { as, children, ...anchorProps } = props;
+    const { children, ...anchorProps } = props;
     return (
       <a className="neon-btn animate-glowPulse" {...anchorProps}>
         {children}
@@ -20,7 +20,7 @@ export default function NeonButton(props: NeonButtonProps) {
     );
   }
   // Default: regular button
-  const { as, children, ...buttonProps } = props;
+  const { children, ...buttonProps } = props;
   return (
     <button className="neon-btn animate-glowPulse" {...buttonProps}>
       {children}
