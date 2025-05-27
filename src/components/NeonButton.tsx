@@ -1,20 +1,28 @@
 import React from "react";
 
-type NeonButtonProps =
-  | (React.ButtonHTMLAttributes<HTMLButtonElement> & { as?: "button" })
-  | (React.AnchorHTMLAttributes<HTMLAnchorElement> & { as: "a" });
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  as?: "button";
+};
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  as: "a";
+};
+
+type NeonButtonProps = ButtonProps | AnchorProps;
 
 export default function NeonButton(props: NeonButtonProps) {
-  const { as = "button", children, ...rest } = props as any;
-  if (as === "a") {
+  if (props.as === "a") {
+    // Anchor (link) button
+    const { as, children, ...anchorProps } = props;
     return (
-      <a className="neon-btn animate-glowPulse" {...rest}>
+      <a className="neon-btn animate-glowPulse" {...anchorProps}>
         {children}
       </a>
     );
   }
+  // Default: regular button
+  const { as, children, ...buttonProps } = props;
   return (
-    <button className="neon-btn animate-glowPulse" {...rest}>
+    <button className="neon-btn animate-glowPulse" {...buttonProps}>
       {children}
     </button>
   );
