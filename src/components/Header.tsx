@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import NeonButton from "@/components/NeonButton"; // Import your NeonButton
 
 // Main nav (left/center)
 const mainLinks = [
@@ -38,8 +39,8 @@ export default function Header() {
               href={href}
               className={`
                 neon-glow font-bold tracking-wide uppercase px-4 py-2 text-lg
-                ${pathname === href ? "text-[#39ff14]" : "text-[#ededed]"}
-                hover:text-[#39ff14] transition
+                ${pathname === href ? "text-primary" : "text-foreground"}
+                hover:text-primary transition
               `}
               aria-current={pathname === href ? "page" : undefined}
             >
@@ -54,17 +55,19 @@ export default function Header() {
         {/* Auth Nav */}
         <nav aria-label="Auth navigation" className="flex gap-4">
           {authLinks.map(({ href, label }) => (
-            <Link
-              key={href}
+            <NeonButton
+              as="a"
               href={href}
+              key={href}
               className={`
-                neon-btn neon-glow uppercase font-bold tracking-wide px-6 py-2 text-lg
-                ${pathname === href ? "bg-[#39ff14] text-black" : ""}
+                uppercase font-bold tracking-wide px-6 py-2 text-lg
+                ${pathname === href ? "bg-primary text-black" : ""}
               `}
               aria-current={pathname === href ? "page" : undefined}
+              aria-label={`Go to ${label}`}
             >
               {label}
-            </Link>
+            </NeonButton>
           ))}
         </nav>
       </div>
