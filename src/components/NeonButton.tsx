@@ -1,29 +1,48 @@
-import React from "react";
+'use client';
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  as?: "button";
-};
-type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-  as: "a";
-};
+import * as React from 'react';
 
-type NeonButtonProps = ButtonProps | AnchorProps;
+type ButtonProps = {
+  as?: 'button';
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function NeonButton(props: NeonButtonProps) {
-  if (props.as === "a") {
-    // Anchor (link) button
-    const { children, ...anchorProps } = props;
+type AnchorProps = {
+  as: 'a';
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>;
+
+export type NeonButtonProps = ButtonProps | AnchorProps;
+
+const NeonButton = React.forwardRef<
+  HTMLButtonElement | HTMLAnchorElement,
+  NeonButtonProps
+>((props, ref) => {
+  const { as = 'button', className = '', children, ...rest } = props;
+
+  const sharedClass = `neon-btn animate-glowPulse ${className}`;
+
+  if (as === 'a') {
     return (
-      <a className="neon-btn animate-glowPulse" {...anchorProps}>
+      <a
+        ref={ref as React.Ref<HTMLAnchorElement>}
+        className={sharedClass}
+        {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+      >
         {children}
       </a>
     );
   }
-  // Default: regular button
-  const { children, ...buttonProps } = props;
+
   return (
-    <button className="neon-btn animate-glowPulse" {...buttonProps}>
+    <button
+      ref={ref as React.Ref<HTMLButtonElement>}
+      className={sharedClass}
+      {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
       {children}
     </button>
   );
-}
+});
+
+NeonButton.displayName = 'NeonButton';
+
+export default React.memo(NeonButton);

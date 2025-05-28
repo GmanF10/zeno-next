@@ -1,80 +1,81 @@
+@import './tokens.css';      /* Design tokens (color, spacing, typography, etc.) */
+@import './layout.css';      /* Layout-specific utilities (container, spacing) */
+@import './utilities.css';  /* Custom utility styles (buttons, cards, animations) */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Neon Theme Variables */
-:root {
-  --background: #0a0c10;
-  --background-alt: rgba(10,32,2,0.85);
-  --foreground: #ededed;
-  --primary: #39ff14;
-  --accent: #65ec4d;
-  --text-light: #cfd8dc;
-  --text-highlight: #a3ffb8;
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
+/* ===================== */
+/* Custom utility styles */
+/* ===================== */
 
-/* Base Body Styling */
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), 'Orbitron', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body), var(--font-heading), sans-serif;
 }
 
-/* Orbitron Font */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-neon);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neon-alt);
+}
 
-/* Neon Glow Utility */
+.neon-card {
+  @apply bg-black/50 border border-accent rounded-2xl drop-shadow-neon backdrop-blur-md text-center transition-all;
+}
+
+.neon-btn {
+  @apply px-6 py-2 min-w-[80px] min-h-[44px] rounded-2xl border-2 border-primary text-primary font-mono text-sm uppercase tracking-wider transition-all bg-transparent hover:bg-primary hover:text-background focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+  box-shadow: var(--shadow-neon);
+}
+
+.neon-header {
+  @apply font-orbitron text-primary drop-shadow-neon;
+}
+
 .neon-glow {
   text-shadow:
-    0 0 8px #39ff14,
-    0 0 16px #39ff14,
-    0 0 32px #39ff14,
-    0 0 48px #39ff14;
-  box-shadow:
-    0 0 20px #39ff14,
-    0 0 40px #39ff14;
+    0 0 8px var(--color-neon),
+    0 0 16px var(--color-neon),
+    0 0 32px var(--color-neon),
+    0 0 48px var(--color-neon);
+  box-shadow: var(--shadow-neon);
 }
 
-/* Button Reset and Neon Style */
-.neon-btn {
-  @apply px-6 py-2 uppercase font-bold rounded-2xl border-2 border-[#39ff14] text-[#39ff14] bg-transparent transition-all;
-  box-shadow: 0 0 16px #39ff14;
-}
-.neon-btn:hover {
-  background-color: #39ff14;
-  color: #0a0c10;
-  box-shadow: 0 0 32px #39ff14;
+.utility-flex-group {
+  @apply flex flex-wrap gap-4 justify-center w-full mt-4;
 }
 
-/* Animated Pulse for Glow */
-@keyframes glowPulse {
-  0%, 100% {
-    box-shadow: 0 0 15px #65ec4d, inset 0 0 30px #65ec4d;
-  }
-  50% {
-    box-shadow: 0 0 40px #39ff14, inset 0 0 70px #39ff14;
-  }
-}
-.animate-glowPulse {
-  animation: glowPulse 3s ease-in-out infinite;
-}
-
-/* Neon Card Container */
-.neon-card {
-  background: rgba(10,32,2,0.85);
-  border: 3px solid #39ff14;
-  border-radius: 2rem;
-  box-shadow: 0 0 48px #39ff14, 0 0 24px #65ec4d;
+/* ===================== */
+/* Container Utility     */
+/* ===================== */
+.container {
+  width: 100%;
+  max-width: var(--layout-max-width);
+  padding-left: var(--layout-content-padding);
+  padding-right: var(--layout-content-padding);
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Utility for Big Neon Headers */
-.neon-header {
-  font-family: 'Orbitron', var(--font-sans), sans-serif;
-  text-transform: uppercase;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  color: #39ff14;
-  text-shadow: 0 0 12px #39ff14, 0 0 28px #39ff14;
-}
+/* ============================= */
+/* Accessibility & Theming Tips */
+/* ============================= */
+
+/* Maintain a minimum touch target size of 44x44px and ensure adequate spacing between interactive elements for better mobile usability. */
+/* Use media query 'prefers-color-scheme' to auto-switch between light and dark themes. */
+/* Ensure clear visual indicators on hover and focus to enhance interactivity and improve accessibility for keyboard and screen reader users. */

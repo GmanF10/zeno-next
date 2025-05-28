@@ -1,0 +1,28 @@
+/* src/styles/layout.css */
+
+/* ===================== */
+/* Utility: Layout Container */
+/* ===================== */
+.layout-container {
+  width: 100%;
+  max-width: var(--layout-max-width);
+  padding-left: var(--layout-content-padding);
+  padding-right: var(--layout-content-padding);
+  margin-left: auto;
+  margin-right: auto;
+  z-index: var(--z-index-header);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===================== */
+/* Utility: Stack Center */
+/* ===================== */
+.layout-stack-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
