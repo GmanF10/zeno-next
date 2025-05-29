@@ -1,81 +1,68 @@
-@import './tokens.css';      /* Design tokens (color, spacing, typography, etc.) */
-@import './layout.css';      /* Layout-specific utilities (container, spacing) */
-@import './utilities.css';  /* Custom utility styles (buttons, cards, animations) */
+/* ============================= */
+/* 🌐 globals.css                */
+/* ============================= */
+
+/* ----------------------------- */
+/* 📦 External Fonts             */
+/* ----------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');
 
+/* ----------------------------- */
+/* 🎨 Design Tokens              */
+/* ----------------------------- */
+@import './tokens.css';
+
+/* ----------------------------- */
+/* 📐 Layout & Utilities         */
+/* ----------------------------- */
+@import './layout.css';
+@import './utilities.css';
+
+/* ----------------------------- */
+/* 🧩 Tailwind Core              */
+/* ----------------------------- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ===================== */
-/* Custom utility styles */
-/* ===================== */
-
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-body), var(--font-heading), sans-serif;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-neon);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-neon-alt);
-}
-
-.neon-card {
-  @apply bg-black/50 border border-accent rounded-2xl drop-shadow-neon backdrop-blur-md text-center transition-all;
-}
-
-.neon-btn {
-  @apply px-6 py-2 min-w-[80px] min-h-[44px] rounded-2xl border-2 border-primary text-primary font-mono text-sm uppercase tracking-wider transition-all bg-transparent hover:bg-primary hover:text-background focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
-  box-shadow: var(--shadow-neon);
-}
-
-.neon-header {
-  @apply font-orbitron text-primary drop-shadow-neon;
-}
-
-.neon-glow {
-  text-shadow:
-    0 0 8px var(--color-neon),
-    0 0 16px var(--color-neon),
-    0 0 32px var(--color-neon),
-    0 0 48px var(--color-neon);
-  box-shadow: var(--shadow-neon);
-}
-
-.utility-flex-group {
-  @apply flex flex-wrap gap-4 justify-center w-full mt-4;
-}
-
-/* ===================== */
-/* Container Utility     */
-/* ===================== */
-.container {
-  width: 100%;
-  max-width: var(--layout-max-width);
-  padding-left: var(--layout-content-padding);
-  padding-right: var(--layout-content-padding);
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* ============================= */
-/* Accessibility & Theming Tips */
+/* 🎯 Base Layer (Overrides)     */
 /* ============================= */
+@layer base {
+  html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
 
-/* Maintain a minimum touch target size of 44x44px and ensure adequate spacing between interactive elements for better mobile usability. */
-/* Use media query 'prefers-color-scheme' to auto-switch between light and dark themes. */
-/* Ensure clear visual indicators on hover and focus to enhance interactivity and improve accessibility for keyboard and screen reader users. */
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+
+  body {
+    font-family: var(--font-body), var(--font-heading), sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
+    line-height: 1.5;
+  }
+
+  /* ========================= */
+  /* 🎚 Scrollbar Styling      */
+  /* ========================= */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-neon);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-neon-alt);
+  }
+}
