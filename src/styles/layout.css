@@ -1,28 +1,86 @@
-/* src/styles/layout.css */
+/* ============================= */
+/* 🧱 layout.css — Modular Layout Variants */
+/* ============================= */
 
-/* ===================== */
-/* Utility: Layout Container */
-/* ===================== */
-.layout-container {
-  width: 100%;
-  max-width: var(--layout-max-width);
-  padding-left: var(--layout-content-padding);
-  padding-right: var(--layout-content-padding);
-  margin-left: auto;
-  margin-right: auto;
-  z-index: var(--z-index-header);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+@layer components {
+  /* 📦 General Container */
+  .layout-container {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    padding-left: var(--layout-content-padding);
+    padding-right: var(--layout-content-padding);
+    margin-inline: auto;
+    z-index: var(--z-header);
+  }
+
+  @media (max-width: var(--breakpoint-sm)) {
+    .layout-container {
+      padding-left: calc(var(--layout-content-padding) / 2);
+      padding-right: calc(var(--layout-content-padding) / 2);
+    }
+  }
+
+  /* 🧭 Stack Centered Layout */
+  .layout-stack-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--gap-y-layout);
+  }
+
+  /* 🧱 Grid-Based Responsive Layout */
+  .layout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--grid-gap);
+  }
+
+  /* 🧩 Sidebar + Main Split (Two Columns) */
+  .layout-sidebar {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: var(--grid-gap);
+  }
+
+  @media (max-width: var(--breakpoint-md)) {
+    .layout-sidebar {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* 🖼️ Main Section Area */
+  .layout-main {
+    padding-block: var(--spacing-xl);
+    padding-inline: var(--spacing-md);
+  }
+
+  /* 🧱 Section / Block Spacing */
+  .space-section {
+    padding-block: var(--spacing-2xl);
+    padding-inline: var(--spacing-md);
+  }
+
+  .space-block {
+    margin-bottom: var(--spacing-xl);
+  }
 }
 
-/* ===================== */
-/* Utility: Stack Center */
-/* ===================== */
-.layout-stack-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+@layer utilities {
+  /* 📏 Gap Helpers */
+  .gap-stack-y {
+    row-gap: var(--gap-y-layout);
+  }
+
+  .gap-stack-x {
+    column-gap: var(--gap-x-layout);
+  }
+
+  /* 📐 Auto Grid Fit Utility */
+  .grid-auto-fit {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--grid-gap);
+  }
 }
