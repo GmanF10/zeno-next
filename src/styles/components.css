@@ -1,26 +1,55 @@
-/* ============================= / / 🧩 components.css             / / ============================= */
+/* ============================= */
+/* 🧩 components.css             */
+/* ============================= */
 
-@layer components { /* 📦 Base Button Wrapper */ .btn-base { @apply inline-flex items-center justify-center font-mono text-sm uppercase tracking-wider rounded-2xl transition-all min-w-[80px] min-h-[44px]; }
+@layer components {
+  /* 📦 Base Button Wrapper */
+  .btn-base {
+    @apply inline-flex items-center justify-center font-mono text-sm uppercase tracking-wider rounded-2xl transition-all min-w-[80px] min-h-[44px];
+  }
 
-/* ✅ Primary Button */ .btn-primary { @apply btn-base text-primary bg-transparent border-2 border-primary hover:bg-primary hover:text-background btn-focus; box-shadow: var(--shadow-glow-neon); }
+  /* ✅ Primary Button */
+  .btn-primary {
+    @apply btn-base text-primary bg-transparent border-2 border-primary hover:bg-primary hover:text-background btn-focus;
+    box-shadow: var(--shadow-glow-neon);
+  }
 
-/* ⭕ Outline Variant */ .btn-outline { @apply btn-base text-primary bg-transparent border-2 border-primary hover:bg-primary hover:text-background btn-focus; }
+  /* 🟩 Secondary Button */
+  .btn-secondary {
+    @apply btn-base text-accent bg-transparent border-2 border-accent hover:bg-accent hover:text-background btn-focus;
+  }
 
-/* 📏 Button Sizes */ .btn-sm { @apply text-xs px-3 py-1; }
+  /* 🟥 Danger Button */
+  .btn-danger {
+    @apply btn-base text-error bg-transparent border-2 border-error hover:bg-error hover:text-background btn-focus;
+  }
 
-.btn-lg { @apply text-lg px-8 py-4; }
+  /* ⭕ Outline Variant */
+  .btn-outline {
+    @apply btn-base text-primary bg-transparent border-2 border-primary hover:bg-primary hover:text-background btn-focus;
+  }
 
-/* 🚫 Disabled State */ .btn-disabled { @apply opacity-40 cursor-not-allowed; }
+  /* 📏 Button Sizes */
+  .btn-sm {
+    @apply text-xs px-3 py-1;
+  }
 
-/* 🧱 Section / Block Spacing */ .space-section { @apply py-12 px-6; }
+  .btn-lg {
+    @apply text-lg px-8 py-4;
+  }
 
-.space-block { @apply mb-8; }
+  /* 🚫 Disabled State */
+  .btn-disabled {
+    @apply opacity-40 cursor-not-allowed;
+  }
 
-/* 🧩 Card */ .neon-card { @apply bg-black/50 border border-accent rounded-2xl drop-shadow-neon backdrop-blur-md text-center transition-all; }
+  /* 🧩 Card */
+  .neon-card {
+    @apply bg-black/50 border border-accent rounded-2xl drop-shadow-neon backdrop-blur-md text-center transition-all;
+  }
 
-/* 🪩 Neon Header */ .neon-header { @apply font-display text-brand-primary drop-shadow-neon; }
-
-/* 📐 Layout Helpers */ .layout-stack-center { @apply flex flex-col items-center justify-center text-center gap-layout; }
-
-.container { width: 100%; max-width: var(--layout-max-width); padding-left: var(--layout-content-padding); padding-right: var(--layout-content-padding); margin-left: auto; margin-right: auto; } }
-
+  /* 🪩 Neon Header */
+  .neon-header {
+    @apply font-display text-primary drop-shadow-neon;
+  }
+}
