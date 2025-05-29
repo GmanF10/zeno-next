@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+const forms = require('@tailwindcss/forms');
+const typography = require('@tailwindcss/typography');
+
 module.exports = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,css}',
@@ -11,6 +14,7 @@ module.exports = {
     './src/styles/utilities.css',
   ],
   safelist: [
+    // Consider refining this list to avoid unnecessary CSS bloat in production
     'px-6', 'py-2', 'rounded-2xl', 'border-2', 'text-[#39ff14]',
     'bg-transparent', 'transition-all', 'hover:bg-[#39ff14]',
     'hover:text-[#0a0c10]', 'min-w-[80px]', 'min-h-[44px]', 'font-mono',
@@ -116,5 +120,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [forms, typography],
 };
