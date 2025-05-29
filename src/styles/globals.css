@@ -2,67 +2,15 @@
 /* 🌐 globals.css                */
 /* ============================= */
 
-/* ----------------------------- */
-/* 📦 External Fonts             */
-/* ----------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');
 
-/* ----------------------------- */
-/* 🎨 Design Tokens              */
-/* ----------------------------- */
 @import './tokens.css';
-
-/* ----------------------------- */
-/* 📐 Layout & Utilities         */
-/* ----------------------------- */
+@import './base.css';
 @import './layout.css';
+@import './components.css';
 @import './utilities.css';
+@import './animations.css';
 
-/* ----------------------------- */
-/* 🧩 Tailwind Core              */
-/* ----------------------------- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* ============================= */
-/* 🎯 Base Layer (Overrides)     */
-/* ============================= */
-@layer base {
-  html {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-  }
-
-  *, *::before, *::after {
-    box-sizing: inherit;
-  }
-
-  body {
-    font-family: var(--font-body), var(--font-heading), sans-serif;
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    min-height: 100%;
-    line-height: 1.5;
-  }
-
-  /* ========================= */
-  /* 🎚 Scrollbar Styling      */
-  /* ========================= */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-neon);
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-neon-alt);
-  }
-}
