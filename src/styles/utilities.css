@@ -1,79 +1,19 @@
 /* ============================= */
-/* Design Tokens (CSS Variables) */
+/* 🛠️ utilities.css             */
 /* ============================= */
 
-:root {
-  --duration-glow: 2s;
-}
-
-
-/* ============================= */
-/* Base Layer (for keyframes)   */
-/* ============================= */
-
-@layer base {
-  @keyframes glow-pulse {
-    0%, 100% {
-      box-shadow: 0 0 8px var(--color-neon), 0 0 16px var(--color-neon);
-      text-shadow: 0 0 10px var(--color-neon);
-    }
-    50% {
-      box-shadow: 0 0 20px var(--color-neon), 0 0 40px var(--color-neon);
-      text-shadow: 0 0 20px var(--color-neon-alt);
-    }
-  }
-}
-
-
-/* ============================= */
-/* Components Layer              */
-/* ============================= */
-
-@layer components {
-  /* Base Button */
-  .btn-base {
-    @apply inline-flex items-center justify-center font-mono text-sm uppercase tracking-wider rounded-2xl transition-all min-w-[80px] min-h-[44px];
+@layer utilities {
+  /* 💡 Glow Pulse Animation */
+  .animate-glow-pulse {
+    @apply animate-[glow-pulse_var(--duration-glow)_ease-in-out_infinite];
   }
 
-  /* Primary Button */
-  .btn-primary {
-    @apply btn-base text-primary bg-transparent border-2 border-primary hover:bg-primary hover:text-background btn-focus;
-    box-shadow: var(--shadow-neon);
+  /* 🔍 Focus Ring Utility */
+  .btn-focus {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
   }
 
-  /* Outline Button */
-  .btn-outline {
-    @apply btn-base text-primary bg-transparent border-2 border-primary hover:bg-primary hover:text-background btn-focus;
-  }
-
-  /* Small and Large Buttons */
-  .btn-sm {
-    @apply text-xs px-3 py-1;
-  }
-
-  .btn-lg {
-    @apply text-lg px-8 py-4;
-  }
-
-  /* Disabled Button */
-  .btn-disabled {
-    @apply opacity-40 cursor-not-allowed;
-  }
-
-  /* Section/Block Spacing */
-  .space-section {
-    @apply py-12 px-6;
-  }
-
-  .space-block {
-    @apply mb-8;
-  }
-
-  /* Layout Helpers */
-  .layout-stack-center {
-    @apply flex flex-col items-center justify-center text-center gap-layout;
-  }
-
+  /* 📐 Gap Stack Helpers */
   .gap-stack-y {
     @apply gap-y-layout;
   }
@@ -81,21 +21,36 @@
   .gap-stack-x {
     @apply gap-x-layout;
   }
-}
 
-
-/* ============================= */
-/* Utilities Layer               */
-/* ============================= */
-
-@layer utilities {
-  /* Glow Pulse Animation Class */
-  .animate-glow-pulse {
-    animation: glow-pulse var(--duration-glow) ease-in-out infinite;
+  /* 📦 Flexbox Utility Group */
+  .utility-flex-group {
+    @apply flex flex-wrap gap-4 justify-center w-full mt-4;
   }
 
-  /* Reusable Focus Ring */
-  .btn-focus {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
+  /* ✨ Neon Glow Utility */
+  .neon-glow {
+    text-shadow:
+      0 0 8px var(--color-brand-neon),
+      0 0 16px var(--color-brand-neon),
+      0 0 32px var(--color-brand-neon);
+    box-shadow: var(--shadow-glow-neon);
+  }
+
+  /* 🌀 Scrollbar Utility */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-brand-neon);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-brand-neon-alt);
   }
 }
