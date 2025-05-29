@@ -17,11 +17,17 @@ export default function Head() {
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="ZENØ" />
 
-      {/* Favicon & theme color */}
+      {/* Favicon & Theme Color */}
       <link rel="icon" href="/favicon.ico" />
       <meta name="theme-color" content="#0c0c0f" />
 
-      {/* Font preconnect for fast load (optional, if self-hosting fonts or using Google Fonts) */}
+      {/* Google Font: Orbitron */}
+      <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet"
+      />
+
+      {/* Performance: Preconnect */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
     </>
