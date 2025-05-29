@@ -44,33 +44,42 @@
   --font-body: 'Geist', 'Geist Fallback', sans-serif;
   --font-code: 'Geist Mono', 'Geist Mono Fallback', monospace;
 
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.25rem;
-  --font-size-xl: 1.5rem;
-  --font-size-2xl: 2rem;
+  /* Modular Font Scaling */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-scale: 1.25;
+
+  --font-size-xs: calc(var(--font-size-base) / var(--font-size-scale) / var(--font-size-scale));
+  --font-size-sm: calc(var(--font-size-base) / var(--font-size-scale));
+  --font-size-lg: calc(var(--font-size-base) * var(--font-size-scale));
+  --font-size-xl: calc(var(--font-size-lg) * var(--font-size-scale));
+  --font-size-2xl: calc(var(--font-size-xl) * var(--font-size-scale));
 
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-bold: 700;
   --font-weight-extrabold: 900;
 
-  /* 🧱 Spacing */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 48px;
-  --spacing-3xl: 64px;
+  /* 🧱 Spacing (Modular) */
+  --spacing-base: 1rem;
+  --spacing-scale: 1.25;
 
-  /* 🟦 Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 24px;
-  --radius-2xl: 32px;
+  --spacing-xs: calc(var(--spacing-base) / var(--spacing-scale) / var(--spacing-scale));
+  --spacing-sm: calc(var(--spacing-base) / var(--spacing-scale));
+  --spacing-md: var(--spacing-base);
+  --spacing-lg: calc(var(--spacing-base) * var(--spacing-scale));
+  --spacing-xl: calc(var(--spacing-lg) * var(--spacing-scale));
+  --spacing-2xl: calc(var(--spacing-xl) * var(--spacing-scale));
+  --spacing-3xl: calc(var(--spacing-2xl) * var(--spacing-scale));
+
+  /* 🟦 Border Radius (Modular) */
+  --radius-base: 4px;
+  --radius-scale: 1.25;
+
+  --radius-sm: var(--radius-base);
+  --radius-md: calc(var(--radius-sm) * var(--radius-scale));
+  --radius-lg: calc(var(--radius-md) * var(--radius-scale));
+  --radius-xl: calc(var(--radius-lg) * var(--radius-scale));
+  --radius-2xl: calc(var(--radius-xl) * var(--radius-scale));
 
   /* 🎯 Z-Index */
   --z-header: 900;
@@ -91,12 +100,12 @@
   --animation-ease: ease-in-out;
   --duration-glow: 2s;
 
-  /* 📐 Layout */
+  /* 📐 Layout (Tied to spacing tokens) */
   --layout-max-width: 1200px;
-  --layout-content-padding: 1.5rem;
-  --grid-gap: 1.25rem;
-  --gap-x-layout: 1.25rem;
-  --gap-y-layout: 2rem;
+  --layout-content-padding: var(--spacing-lg);
+  --grid-gap: var(--spacing-md);
+  --gap-x-layout: var(--spacing-md);
+  --gap-y-layout: var(--spacing-lg);
 
   /* 🌫 Opacity */
   --opacity-muted: 0.7;
