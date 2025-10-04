@@ -10,7 +10,7 @@
 
 **DO NOT** open public issues for security vulnerabilities.
 
-Email: [your-email]@[domain]
+Email: [prod]@[hasyme.com]
 Response time: 24 hours
 
 Or use GitHub's private vulnerability reporting:
