@@ -34,3 +34,13 @@ yarn.lock -text
 
 # No line ending conversions for shell scripts (optional)
 *.sh     text eol=lf
+
+# Language composition (for documentation only)
+# TypeScript: 74.4%
+# CSS: 17.2%
+# JavaScript: 8.4%
+
+# Linguist language overrides (ensure GitHub detects languages correctly)
+*.ts linguist-language=TypeScript
+*.js linguist-language=JavaScript
+*.css linguist-language=CSS
